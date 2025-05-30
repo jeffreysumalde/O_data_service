@@ -1,0 +1,42 @@
+<mvc:View controllerName="sapips.training.project2.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+     <Table id="idTables1" items="{/Products}">
+        <headerToolbar>
+            <OverflowToolbar id="idOFT">
+                <content>
+                    <Title id="idTableTitleSCart" text="{i18n>Products}"/>
+                    <ToolbarSpacer id="idTSpacer"/>
+                    <ToggleButton id="idBtnAddItems" text="Discontinued" press="_onPressDiscontinued"/>
+                    <SearchField id="search" width="50%" search="onFilterProducts" liveChange=".onSearch"/>
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column id="idCol1">
+                <Text id="idColText1" text="{i18n>Product}" />
+            </Column>
+            <Column id="idCol2">
+                <Text id="idColText2" text="{i18n>Supplier}" />
+            </Column>
+            <Column id="idCol3">
+                <Text id="idColText3" text="{i18n>Price}" />
+            </Column>
+              <Column id="idCol4">
+                <Text id="idColText4" text="Discontinued" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem id="idColListItem1" vAlign="Middle">
+                <cells>
+                    <Text id="idText1" text="{ProductName}" />
+                    <Text id="idText2" text="{SupplierID}" />
+                    <Text id="idText3" text="{UnitPrice}" />
+                    <Text id="idText4" text="{Discontinued}" />
+                </cells>
+            </ColumnListItem>       
+        </items>
+    </Table>
+    </Page>
+</mvc:View>
