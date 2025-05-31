@@ -11,6 +11,7 @@ sap.ui.define([
           this.oFilter =  null;
           this.oDFilter =  null;
         },
+        //Live search function
         _onSearch: function (oEvent) {
             let sQuery = oEvent.getParameter("newValue").toLowerCase() || oEvent.getParameter("query");
 
@@ -25,7 +26,7 @@ sap.ui.define([
             }
             this._applyCombinedFilters();
           },
-
+        //Filter function for discontinue used toggle button
           _onPressDiscontinued: function (oEvent) {
             let bPressed = oEvent.getParameter("pressed");
     
@@ -40,7 +41,7 @@ sap.ui.define([
             }
             this._applyCombinedFilters();
           },
-
+         //Combined all filters from live search and discontinue filters
           _applyCombinedFilters: function() {
             let oTable = this.byId("idTables1");
             let oBinding = oTable.getBinding("items");
