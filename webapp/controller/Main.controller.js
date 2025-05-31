@@ -1,44 +1,60 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-"sap/ui/model/Filter",
+    "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator"
 ], (Controller, Filter, FilterOperator) => {
     "use strict";
 
     return Controller.extend("sapips.training.project2.controller.Main", {
         onInit() {
+
+          this.oFilter =  null;
+          this.oDFilter =  null;
         },
-        onSearch: function (oEvent) {
-            var sQuery = oEvent.getParameter("newValue") || oEvent.getParameter("query");
-            var oTable = this.byId("idTables1"); 
-            var oBinding = oTable.getBinding("items");
-          
+        _onSearch: function (oEvent) {
+            let sQuery = oEvent.getParameter("newValue").toLowerCase() || oEvent.getParameter("query");
+
             if (sQuery) {
-              var oFilter = new Filter({
+                this.oFilter = new Filter({
                 path: "ProductName",
-                operator: FilterOperator.EQ,
+                operator: FilterOperator.Contains,
                 value1: sQuery
             });
-              oBinding.filter([oFilter]);
             } else {
-              oBinding.filter([]); 
+              this.oFilter =  null;
             }
+            this._applyCombinedFilters();
           },
 
           _onPressDiscontinued: function (oEvent) {
-            var bPressed = oEvent.getParameter("pressed");
-            var oTable = this.byId("idTables1");
-            var oBinding = oTable.getBinding("items");
-          
+            let bPressed = oEvent.getParameter("pressed");
+    
             if (bPressed) {
-                var oFilter = new Filter({
+                    this.oDFilter = new Filter({
                     path: "Discontinued",
                     operator: FilterOperator.EQ,
                     value1: bPressed
                 });
-              oBinding.filter([oFilter]);
             } else {
-              oBinding.filter([]); 
+              this.oDFilter =  null;
+            }
+            this._applyCombinedFilters();
+          },
+
+          _applyCombinedFilters: function() {
+            let oTable = this.byId("idTables1");
+            let oBinding = oTable.getBinding("items");
+          
+            // Combine all active filters using AND
+            var aAllFilters = []
+            .concat(this.oFilter ? [this.oFilter] : [])
+            .concat(this.oDFilter ? [this.oDFilter] : []);
+          
+            if (aAllFilters.length > 0) {
+              let oCombinedFilter = new Filter(aAllFilters, true); 
+              oBinding.filter(oCombinedFilter);
+            } else {
+              oBinding.filter([]);
             }
           }
     });

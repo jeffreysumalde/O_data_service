@@ -9,7 +9,7 @@
                     <Title id="idTableTitleSCart" text="{i18n>Products}"/>
                     <ToolbarSpacer id="idTSpacer"/>
                     <ToggleButton id="idBtnAddItems" text="Discontinued" press="_onPressDiscontinued"/>
-                    <SearchField id="search" width="50%" search="onFilterProducts" liveChange=".onSearch"/>
+                    <SearchField id="search" width="50%" search="onFilterProducts" liveChange="_onSearch"/>
                 </content>
             </OverflowToolbar>
         </headerToolbar>
@@ -24,7 +24,7 @@
                 <Text id="idColText3" text="{i18n>Price}" />
             </Column>
               <Column id="idCol4">
-                <Text id="idColText4" text="Discontinued" />
+                <Text id="idColText4" text="{i18n>Discontinued}" />
             </Column>
         </columns>
         <items>
