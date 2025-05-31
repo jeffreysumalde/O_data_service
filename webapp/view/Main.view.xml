@@ -23,17 +23,14 @@
             <Column id="idCol3">
                 <Text id="idColText3" text="{i18n>Price}" />
             </Column>
-              <Column id="idCol4">
-                <Text id="idColText4" text="{i18n>Discontinued}" />
-            </Column>
         </columns>
         <items>
             <ColumnListItem id="idColListItem1" vAlign="Middle">
                 <cells>
-                    <Text id="idText1" text="{ProductName}" />
+                    <Text id="idText1" text="{= ${ProductName} + '\n' + 'ProductID:' + ' ' + ${ProductID} }"
+                                           wrapping="true" />
                     <Text id="idText2" text="{SupplierID}" />
-                    <Text id="idText3" text="{UnitPrice}" />
-                    <Text id="idText4" text="{Discontinued}" />
+                    <Text id="idText3" text="{= ${UnitPrice} + '\n' + ${QuantityPerUnit} }" />
                 </cells>
             </ColumnListItem>       
         </items>
